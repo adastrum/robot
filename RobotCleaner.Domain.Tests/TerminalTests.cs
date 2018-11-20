@@ -1,4 +1,6 @@
-﻿using Moq;
+﻿using System.Collections.Generic;
+using FluentAssertions;
+using Moq;
 using Xunit;
 
 namespace RobotCleaner.Domain.Tests
@@ -14,13 +16,17 @@ namespace RobotCleaner.Domain.Tests
                 .Setup(x => x.Read())
                 .Returns("2\r\n10 22\r\nE 2\r\nN 1");
 
+            var expected = new Instructions(
+                x: 10, y: 22,
+                commands: new List<Command>
+                {
+                    new Command(Direction.E, 2),
+                    new Command(Direction.N, 1)
+                });
+
             var actual = terminal.ReadInstructions();
 
-            Assert.Equal(10, actual.X);
-            Assert.Equal(22, actual.Y);
-            Assert.Equal(2, actual.Commands.Count);
-            Assert.Equal(new Command(Direction.E, 2), actual.Commands[0]);
-            Assert.Equal(new Command(Direction.N, 1), actual.Commands[1]);
+            actual.Should().BeEquivalentTo(expected);
         }
 
         [Fact]

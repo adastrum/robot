@@ -1,6 +1,6 @@
 ﻿namespace RobotCleaner.Domain
 {
-    public struct Command
+    public class Command
     {
         public Direction Direction { get; }
         public int NumberOfSteps { get; }

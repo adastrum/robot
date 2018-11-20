@@ -27,6 +27,7 @@ namespace RobotCleaner.ConsoleApp
 
             terminal.WriteReport(robot.GetCleanedPlacesCount());
 
+            Console.WriteLine("Press ENTER to terminate");
             Console.ReadLine();
         }
     }

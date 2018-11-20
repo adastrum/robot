@@ -29,5 +29,14 @@ namespace RobotCleaner.Domain.Tests
             robot.Move(Direction.N, 1);
             Assert.Equal(4, robot.GetCleanedPlacesCount());
         }
+
+        [Fact]
+        public void GetCleanedPlacesCount_HandlesOverlapping()
+        {
+            var robot = new Robot(1, 0);
+            robot.Move(Direction.E, 1);
+            robot.Move(Direction.W, 3);
+            Assert.Equal(4, robot.GetCleanedPlacesCount());
+        }
     }
 }

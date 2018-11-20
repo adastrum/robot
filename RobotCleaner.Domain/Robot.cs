@@ -10,7 +10,7 @@ namespace RobotCleaner.Domain
 
         public Robot(int x, int y)
         {
-            _point = new Point(x, y);
+            Visit(x, y);
         }
 
         public int X => _point.X;
@@ -47,13 +47,18 @@ namespace RobotCleaner.Domain
                     throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
             }
 
+            Visit(x, y);
+        }
+
+        private void Visit(int x, int y)
+        {
             _point = new Point(x, y);
             _visited[_point] = true;
         }
 
         public int GetCleanedPlacesCount()
         {
-            return _visited.Count + 1;
+            return _visited.Count;
         }
     }
 }
